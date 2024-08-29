@@ -1,27 +1,25 @@
-def inorder(arr, index, result):
-    if index >= len(arr):
-        return result
+T = int(input())
 
-    inorder(arr, 2 * index + 1, result)
-    result.append(arr[index])
-    inorder(arr, 2 * index + 2, result)
+for tc in range(T):
+    N = int(input())
+    lst = list(map(int, input().split()))
 
+    result = [0]
+    for i in range(1, N+1):
+        result.append(lst[i-1])
+        print(i, i//2)
+        if i == 2:  # len(result) == 3일 때, i는 2
+            if result[i] < result[i-1]:
+                result[i-1], result[i] = result[i], result[i-1]
+        elif i > 2:  # len(result) > 3일 때, i는 3 이상
+            if result[i] < result[i//2]:
+                result[i], result[i//2] = result[i//2], result[i]
 
-t = int(input())
-
-for tc in range(1, t + 1):
-    n = int(input())
-    arr = list(range(1, n + 1))
-    result = []
-    inorder(arr, 0, result)
-
-    dic = {}
-    num = 1
-    while True:
-        for i in result:
-            dic[i] = num
-            num += 1
-        break
-    print(dic)
     print(result)
-    print(f'#{tc} {dic[1]} {dic[n // 2]}')
+
+    cnt = 0
+    step = N
+    while step > 0:  # step != 0 대신 step > 0 사용
+        cnt += result[step]
+        step = step//2
+    print(cnt)

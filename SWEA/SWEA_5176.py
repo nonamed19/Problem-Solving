@@ -6,6 +6,7 @@ def inorder(idx):
     result.append(idx)
     inorder(idx*2+1)           # 인덱스가 *2+1가 되면 오른쪽임
 
+
 T = int(input())
 
 for tc in range(T):
