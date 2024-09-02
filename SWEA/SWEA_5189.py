@@ -15,11 +15,13 @@ def KFC(x):
 
 def f(lst):
     temp = []
-    for i in range(len(lst)):
-        if arr[i][lst[i]] != 0:
-            temp.append(arr[i][lst[i]])
-        else:
-            return 100*N
+    # 사무실에서 출발하여 사무실로 돌아오는 경로만을 고려
+    if lst[0] == 0:
+        for i in range(len(lst)-1):
+            temp.append(arr[lst[i]][lst[i+1]])
+        temp.append(arr[lst[N-1]][0]) # 마지막 항 추가
+    else:
+        return 100*N*N
     return sum(temp)
 
 

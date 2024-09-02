@@ -1,13 +1,19 @@
-def f(now_i, now_j):
-    global cnt
-    if now_i == N-1 and now_j == N-1:
-        print(cnt)
+def f(i, j, temp_sum):
+    global result
+    visited[i][j] = 1
+
+    if i == N-1 and j == N-1:
+        result = min(result, temp_sum)
+        visited[i][j] = 0 # 백트래킹을 위해 방문 상태 초기화
         return
 
-    if 0 <= now_i < N and 0 <= now_j < N:
-        cnt += arr[now_i][now_j]
-        f(now_i+1, now_j)
-        f(now_i, now_j+1)
+    for di, dj in [(0, 1), (1, 0)]:
+        ni, nj = i + di, j + dj
+        if 0 <= ni < N and 0 <= nj < N:
+            if visited[ni][nj] == 0:
+                f(ni, nj, temp_sum + arr[ni][nj])
+
+    visited[i][j] = 0 # 백트래킹을 위해 방문 상태 초기화
 
 
 T = int(input())
@@ -15,7 +21,9 @@ T = int(input())
 for tc in range(T):
     N = int(input())
     arr = [list(map(int, input().split())) for _ in range(N)]
-    cnt = 0
+    visited = [[0]*N for _ in range(N)]
+    result = 10*N*N
 
-    start = [0, 0]
-    f(start[0], start[1])
+    f(0, 0, arr[0][0])
+
+    print(f'#{tc+1} {result}')
