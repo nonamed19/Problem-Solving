@@ -1,25 +1,18 @@
-from pprint import pprint
-
 T = int(input())
 
 for tc in range(T):
     N = int(input())
-    arr_input = [list(map(int, input().split())) for _ in range(N)]
-    arr = [[0]*(N+2) for _ in range(N+2)]
-    result = []
+    arr = [list(map(int, input().split())) for _ in range(N)]
+    result = 0
 
     for i in range(N):
         for j in range(N):
-            arr[i+1][j+1] = arr_input[i][j]
+            if arr[i][j] == 1:
+                width, height = 1, 1
+                while arr[i + width][j] == 1:
+                    width += 1
+                while arr[i][j + height] == 1:
+                    height += 1
+                result = max(result, width * height)
 
-    for i in range(N):
-        for j in range(N):
-            if arr[i+1][j+1] == 1 and arr[i][j+1] == 0 and arr[i+1][j] == 0:
-                start_i, start_j, now_i, now_j = i+1, j+1, i+1, j+1
-                while arr[now_i+1][now_j] == 1:
-                    now_i += 1
-                while arr[now_i][now_j+1] == 1:
-                    now_j += 1
-                result.append((now_i-start_i+1)*(now_j-start_j+1))
-
-    print('#%d %d' %(tc+1, max(result)))
+    print(f'#{tc+1} {result}')
