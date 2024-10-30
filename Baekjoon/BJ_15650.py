@@ -1,3 +1,8 @@
+N, M = map(int, input().split())
+
+
+
+"""
 from itertools import permutations
 
 N, M = map(int, input().split())
@@ -14,3 +19,4 @@ results = sorted(list(set(results)))
 
 for result in results:
     print(*result)
+"""
