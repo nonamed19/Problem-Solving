@@ -3,15 +3,11 @@ input = sys.stdin.readline
 
 M = int(input())
 
-count = 1
 direction = 0
+count = 1
 for _ in range(M):
     a, b, s = map(int, input().split())
+    count = int(count * b/a)
+    direction = (direction + s) % 2
 
-    # 기어비 설정
-    count /= a/b
-    # 방향 설정
-    if s == 1:
-        direction = s - direction
-
-print(direction, int(count))
+print(direction, count)
