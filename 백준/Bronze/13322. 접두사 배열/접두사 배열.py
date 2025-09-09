@@ -1,0 +1,8 @@
+import sys
+input = sys.stdin.readline
+
+
+S = input().strip()
+
+for i in range(len(S)):
+    print(i)
