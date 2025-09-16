@@ -1,22 +1,22 @@
-import sys; input = sys.stdin.readline
-
-
 order = 0
 while True:
     order += 1
-    words1 = list(input().strip())
-    words2 = list(input().strip())
+    flag = True
+    words1, words2 = input(), input()
 
-    if words1 == list('END') and words2 == list('END'):
+    if words1 == 'END' and words2 == 'END':
         break
 
+    words1, words2 = sorted(words1), sorted(words2)
+
     if len(words1) == len(words2):
-        for word2 in words2:
-            if word2 in words1:
-                words1.remove(word2)
-        if len(words1) == 0:
-            print(f'Case {order}: same')
-        else:
-            print(f'Case {order}: different')
+        for i in range(len(words1)):
+            if words1[i] != words2[i]:
+                flag = False
+    else:
+        flag = False
+
+    if flag:
+        print(f'Case {order}: same')
     else:
         print(f'Case {order}: different')
