@@ -1,0 +1,2 @@
+name = 'nkugwan'
+print(name)
