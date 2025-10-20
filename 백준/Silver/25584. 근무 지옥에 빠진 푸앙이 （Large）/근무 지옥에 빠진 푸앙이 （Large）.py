@@ -1,23 +1,18 @@
+import sys
+input = sys.stdin.readline
+
 N = int(input())
 
 schedules = {}
 time = [4, 6, 4, 10]
 for _ in range(N):
     for i in range(4):
-        names = input().split()
-        for name in names:
-            if name not in schedules:
-                schedules[name] = time[i]
+        for name in input().split():
+            if name == '-':
+                continue
+            schedules[name] = schedules.get(name, 0) + time[i]
 
-            else:
-                schedules[name] += time[i]
-
-if '-' in schedules:
-    schedules.pop('-')
-
-if schedules and (max(schedules.values()) - min(schedules.values())) <= 12:
-    print('Yes')
-elif not schedules:
+if not schedules:
     print('Yes')
 else:
-    print('No')
+    print('Yes' if max(schedules.values()) - min(schedules.values()) <= 12 else 'No')
